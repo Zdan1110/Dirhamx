@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>DirhamX — Digital Trust You Can Hold</title>
+
+<!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Custom Tailwind config (inline for CDN mode) -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dx: {
+                black: "#0a0a0a",
+                graphite: "#1B1B1B",
+                green: "#2ECC71",
+                silver: "#C0C0C0",
+                muted: "#4b4b4b",
+              },
+            },
+            boxShadow: {
+              glow: "0 0 40px rgba(46,204,113,0.3)",
+            },
+            fontFamily: {
+              heading: ["Poppins", "ui-sans-serif", "system-ui"],
+              body: ["Inter", "ui-sans-serif", "system-ui"],
+            },
+            backgroundImage: {
+              "dx-radial":
+                "radial-gradient(circle at 20% 20%, rgba(46,204,113,0.15) 0%, rgba(0,0,0,0) 70%)",
+            },
+          },
+        },
+      };
+    </script>
+
+<!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+<style>
+      :root {
+        color-scheme: dark;
+      }
+      body {
+        background-color: #0a0a0a;
+        color: white;
+        font-family: "Inter", system-ui, sans-serif;
+      }
+      .section-container {
+        @apply max-w-7xl mx-auto px-6 py-16 lg:py-24;
+      }
+      .section-eyebrow {
+        @apply text-dx-green text-sm font-medium uppercase tracking-wider mb-2;
+      }
+      .section-title {
+        @apply text-3xl md:text-4xl font-semibold font-heading tracking-tight text-white;
+      }
+      .card-surface {
+        @apply bg-[#111111] border border-gray-800/60 rounded-xl p-6 shadow-xl shadow-black/60;
+      }
+      .btn-primary {
+        @apply inline-flex items-center justify-center rounded-lg bg-dx-green text-black font-semibold px-5 py-3 text-sm md:text-base shadow-glow hover:shadow-glow hover:opacity-90 transition;
+      }
+      .btn-outline {
+        @apply inline-flex items-center justify-center rounded-lg border border-dx-green text-dx-green font-semibold px-5 py-3 text-sm md:text-base hover:bg-dx-green hover:text-black transition;
+      }
+
+/* fallback if @apply doesn't parse in CDN mode */
+      .section-container {
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+      @media (min-width: 1024px) {
+        .section-container {
+          padding-top: 6rem;
+          padding-bottom: 6rem;
+        }
+      }
+      .section-eyebrow {
+        color: #2ecc71;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+      }
+      .section-title {
+        color: #fff;
+        font-family: "Poppins", system-ui, sans-serif;
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+      }
+      @media (min-width: 768px) {
+        .section-title {
+          font-size: 2.25rem;
+          line-height: 2.5rem;
+        }
+      }
+      .card-surface {
+        background-color: #111111;
+        border: 1px solid rgba(31, 41, 55, 0.6);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      }
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.5rem;
+        background-color: #2ecc71;
+        color: #000;
+        font-weight: 600;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        box-shadow: 0 0 40px rgba(46, 204, 113, 0.3);
+      }
+      @media (min-width: 768px) {
+        .btn-primary {
+          font-size: 1rem;
+          line-height: 1.5rem;
+        }
+      }
+      .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.5rem;
+        border: 1px solid #2ecc71;
+        color: #2ecc71;
+        font-weight: 600;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+      .btn-outline:hover {
+        background-color: #2ecc71;
+        color: #000;
+        transition: all 0.2s;
+      }
+
+.border-grid {
+        border: 1px solid rgba(192, 192, 192, 0.15);
+        background: radial-gradient(
+            circle at 0% 0%,
+            rgba(46, 204, 113, 0.25) 0%,
+            rgba(0, 0, 0, 0) 60%
+          ),
+          #111111;
+      }
+
+.nav-link {
+        color: rgb(209 213 219);
+        font-size: 0.875rem;
+      }
+      .nav-link:hover {
+        color: #2ecc71;
+      }
+    </style>
+  </head>
+<body class="bg-dx-black text-white selection:bg-dx-green selection:text-black">
+    <!-- NAVBAR -->
+    <header
+    class="border-b border-gray-800/60 bg-[#0a0a0a]/80 backdrop-blur supports-[backdrop-filter]:bg-[#0a0a0a]/60 sticky top-0 z-50"
+    >
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <!-- LOGO -->
+        <a href="#hero" class="flex items-center gap-2">
+        <div
+            class="h-9 w-9 rounded-lg bg-dx-green text-black font-heading font-bold flex items-center justify-center text-xs shadow-glow"
+        >
+            DX
+        </div>
+        <div class="leading-tight">
+            <div class="text-white font-heading font-semibold text-sm tracking-tight">
+            DirhamX
+            </div>
+            <div
+            class="text-[10px] text-dx-green uppercase tracking-wider font-medium"
+            >
+            Digital Trust
+            </div>
+        </div>
+        </a>
+
+        <!-- HAMBURGER (Mobile only) -->
+        <button
+        id="menu-toggle"
+        class="md:hidden flex flex-col justify-center items-center w-9 h-9 border border-gray-700 rounded-lg hover:border-dx-green transition"
+        >
+        <span class="w-4 h-0.5 bg-gray-300 mb-1 transition-all"></span>
+        <span class="w-4 h-0.5 bg-gray-300 mb-1 transition-all"></span>
+        <span class="w-4 h-0.5 bg-gray-300 transition-all"></span>
+        </button>
+
+        <!-- NAV MENU -->
+        <nav
+        id="mobile-menu"
+        class="hidden md:flex items-center gap-6 md:static absolute top-full left-0 w-full md:w-auto bg-[#0a0a0a] md:bg-transparent border-t border-gray-800/60 md:border-none flex-col md:flex-row text-center md:text-left"
+        >
+        <a href="index.html" class="nav-link py-3 md:py-0 block">About</a>
+        <a href="ecosystem.html" class="nav-link py-3 md:py-0 block">Ecosystem</a>
+        <a href="work.html" class="nav-link py-3 md:py-0 block">Work With Us</a>
+        <a href="roadmap.html" class="nav-link py-3 md:py-0 block">Roadmap</a>
+        <a href="contact.html" class="nav-link py-3 md:py-0 block">Contact</a>
+
+        <a
+            href="access.html"
+            class="btn-primary text-xs md:text-sm my-4 md:my-0"
+        >
+            Early Access
+        </a>
+        </nav>
+    </div>
+    </header>
+
+    <!-- WORK WITH US -->
+    <section id="work" class="relative overflow-hidden bg-dx-radial border-b border-gray-800/60">
+      <div class="section-container">
+        <div class="max-w-3xl">
+            <div class="section-eyebrow">Work With Us</div>
+            <h2 class="section-title">We Build Together, We Grow Together.</h2>
+            <p class="mt-4 text-gray-400 text-base leading-relaxed">
+            DirhamX partners with visionary individuals and institutions to
+            digitize and democratize real-world wealth.
+            </p>
+        </div>
+
+            <div class="mt-10 grid gap-6 md:grid-cols-3">
+                    <div class="card-surface">
+                    <div
+                        class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+                    >
+                        Asset Partners
+                    </div>
+                    <div
+                        class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+                    >
+                        Asset Partners
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mt-3">
+                        Silver, land, agriculture, or product owners who wish to tokenize
+                        and scale their assets.
+                    </p>
+            </div>
+
+            <div class="card-surface">
+                    <div
+                        class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+                    >
+                        Strategic Angels
+                    </div>
+                    <div
+                        class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+                    >
+                        Strategic Angels
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mt-3">
+                        Early supporters and believers in the real-world-asset revolution.
+                    </p>
+            </div>
+
+            <div class="card-surface">
+                    <div
+                        class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+                    >
+                        Distribution Partners
+                    </div>
+                    <div
+                        class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+                    >
+                        Distribution Partners
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mt-3">
+                        Agents and network builders who expand our ecosystem through
+                        compliant affiliate systems.
+                    </p>
+                    </div>
+            </div>
+
+            <div
+                class="mt-6 text-gray-300 text-base leading-relaxed max-w-3xl"
+            >
+                <span class="text-white font-medium">DX Land</span> integrates
+                aquaculture and agriculture — combining real production, real
+                traceability, and digital transparency through TruID.
+            </div>
+
+            <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                <a href="contact.html" class="btn-primary">Partner With DirhamX</a>
+                <a href="contact.html" class="btn-outline">Join Affiliate Program</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section
+      id="services"
+      class="border-y border-gray-800/60"
+    >
+    <div class="section-container">
+      <div class="max-w-3xl">
+        <div class="section-eyebrow">Our Services</div>
+        <h2 class="section-title">
+          Our Expertise: Turning Real Assets into Digital Ecosystems
+        </h2>
+      </div>
+
+<div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="card-surface">
+          <div
+            class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+          >
+            RWA Token Structuring
+          </div>
+          <div
+            class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+          >
+            RWA Token Structuring
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mt-3">
+            We design and tokenize verified real-world assets such as silver,
+            land, and commodities into secure digital units.
+          </p>
+        </div>
+
+        <div class="card-surface">
+          <div
+            class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+          >
+            Precious Metal Digitization
+          </div>
+          <div
+            class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+          >
+            Precious Metal Digitization
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mt-3">
+            Convert physical bullion into digital tokens (DXS Silver) backed by
+            custodial verification.
+          </p>
+        </div>
+
+        <div class="card-surface">
+          <div
+            class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+          >
+            Land & Agriculture Tokenization
+          </div>
+          <div
+            class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+          >
+            Land & Agriculture Tokenization
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mt-3">
+            Digitize land and food systems into participatory, traceable asset
+            models (DX Land).
+          </p>
+        </div>
+
+        <div class="card-surface">
+          <div
+            class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+          >
+            TruID Traceability
+          </div>
+          <div
+            class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+          >
+            TruID Traceability
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mt-3">
+            Blockchain-secured verification for products, lab tests, warranty
+            claims, and authenticity.
+          </p>
+        </div>
+
+        <div class="card-surface">
+          <div
+            class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+          >
+            Ecosystem Incentive Program (PAZA)
+          </div>
+          <div
+            class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+          >
+            Ecosystem Incentive Program (PAZA)
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mt-3">
+            Community-based participation and loyalty token system for members
+            and distributors.
+          </p>
+        </div>
+
+        <div class="card-surface">
+          <div
+            class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+          >
+            Affiliate & Distribution Network
+          </div>
+          <div
+            class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+          >
+            Affiliate & Distribution Network
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mt-3">
+            Multi-layer affiliate system to empower entrepreneurs and expand
+            ecosystem adoption.
+          </p>
+        </div>
+      </div>
+    </div>
+    </section>
+
+<!-- FOOTER -->
+<footer
+      class="border-t border-gray-800/60 bg-[#0f0f0f] pt-16 pb-12 text-sm"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10 text-gray-300"
+      >
+        <div>
+          <div
+            class="text-white font-heading font-semibold text-lg tracking-tight"
+          >
+            DirhamX
+          </div>
+          <p class="text-gray-400 text-sm mt-3 leading-relaxed">
+            DirhamX develops real-world-asset (RWA) ecosystems that connect
+            physical commodities, land, and production to transparent digital
+            participation.
+          </p>
+        </div>
+
+<div>
+          <div
+            class="text-dx-green font-semibold uppercase text-xs tracking-wider mb-3"
+          >
+            Quick Links
+          </div>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="#about" class="hover:text-dx-green">About</a></li>
+            <li>
+              <a href="#ecosystem" class="hover:text-dx-green">Ecosystem</a>
+            </li>
+            <li>
+              <a href="#work" class="hover:text-dx-green">Work With Us</a>
+            </li>
+            <li>
+              <a href="#services" class="hover:text-dx-green">Services</a>
+            </li>
+            <li>
+              <a href="contact.html" class="hover:text-dx-green">Contact</a>
+            </li>
+          </ul>
+        </div>
+
+<div>
+          <div
+            class="text-dx-green font-semibold uppercase text-xs tracking-wider mb-3"
+          >
+            Contact
+          </div>
+          <p class="text-gray-300 leading-relaxed">
+            Email:
+            <span class="text-white font-medium"
+              >contact@dirhamx.digital</span
+            ><br />
+            HQ (placeholder): DX DIGITAL Ventures,<br />
+            Kuala Lumpur, Malaysia
+          </p>
+        </div>
+
+<div>
+          <div
+            class="text-dx-green font-semibold uppercase text-xs tracking-wider mb-3"
+          >
+            Legal
+          </div>
+          <p class="text-gray-400 text-xs leading-relaxed">
+            DirhamX and its affiliates operate within an ethical, utility-based
+            framework focused on real-world asset traceability. DirhamX does
+            not guarantee profits or offer financial returns. Participation is
+            subject to local regulations and jurisdictional eligibility.
+          </p>
+        </div>
+      </div>
+
+<div
+        class="max-w-7xl mx-auto px-6 mt-12 text-[11px] text-gray-600 border-t border-gray-800/60 pt-6"
+      >
+        © <span id="year"></span> DirhamX. All rights reserved.
+      </div>
+    </footer>
+
+    <script>
+      // set current year in footer
+      document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+        const menuToggle = document.getElementById("menu-toggle");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const bars = menuToggle.querySelectorAll("span");
+
+        // fungsi untuk toggle menu
+        function toggleMenu() {
+          mobileMenu.classList.toggle("hidden");
+
+          // animasi garis hamburger jadi X
+          bars[0].classList.toggle("rotate-45");
+          bars[0].classList.toggle("translate-y-1.5");
+          bars[1].classList.toggle("opacity-0");
+          bars[2].classList.toggle("-rotate-45");
+          bars[2].classList.toggle("-translate-y-1.5");
+        }
+
+        // buka/tutup menu saat tombol diklik
+        menuToggle.addEventListener("click", (e) => {
+          e.stopPropagation(); // cegah event bubbling
+          toggleMenu();
+        });
+
+        // tutup menu jika klik di luar area menu dan tombol
+        document.addEventListener("click", (e) => {
+          const isClickInsideMenu =
+            mobileMenu.contains(e.target) || menuToggle.contains(e.target);
+
+          // hanya jalankan kalau menu sedang terbuka dan klik di luar
+          if (!isClickInsideMenu && !mobileMenu.classList.contains("hidden")) {
+            toggleMenu();
+          }
+        });
+
+        // Efek opacity menu mobile saat scroll
+        window.addEventListener("scroll", () => {
+          const mobileMenu = document.getElementById("mobile-menu");
+
+          // hanya jalan di mobile dan saat menu terbuka
+          if (window.innerWidth <= 768 && !mobileMenu.classList.contains("hidden")) {
+            if (window.scrollY > 15) {
+              // kurangi opacity saat scroll ke bawah
+              mobileMenu.style.backgroundColor = "rgba(10, 10, 10, 0.7)";
+              mobileMenu.style.transition = "background-color 0.3s ease";
+            } else {
+              // kembalikan opacity saat di atas
+              mobileMenu.style.backgroundColor = "rgba(10, 10, 10, 1)";
+            }
+          }
+        });
+    </script>
+</body>

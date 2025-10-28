@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>DirhamX — Digital Trust You Can Hold</title>
+
+<!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Custom Tailwind config (inline for CDN mode) -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dx: {
+                black: "#0a0a0a",
+                graphite: "#1B1B1B",
+                green: "#2ECC71",
+                silver: "#C0C0C0",
+                muted: "#4b4b4b",
+              },
+            },
+            boxShadow: {
+              glow: "0 0 40px rgba(46,204,113,0.3)",
+            },
+            fontFamily: {
+              heading: ["Poppins", "ui-sans-serif", "system-ui"],
+              body: ["Inter", "ui-sans-serif", "system-ui"],
+            },
+            backgroundImage: {
+              "dx-radial":
+                "radial-gradient(circle at 20% 20%, rgba(46,204,113,0.15) 0%, rgba(0,0,0,0) 70%)",
+            },
+          },
+        },
+      };
+    </script>
+
+<!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+<style>
+      :root {
+        color-scheme: dark;
+      }
+      body {
+        background-color: #0a0a0a;
+        color: white;
+        font-family: "Inter", system-ui, sans-serif;
+      }
+      .section-container {
+        @apply max-w-7xl mx-auto px-6 py-16 lg:py-24;
+      }
+      .section-eyebrow {
+        @apply text-dx-green text-sm font-medium uppercase tracking-wider mb-2;
+      }
+      .section-title {
+        @apply text-3xl md:text-4xl font-semibold font-heading tracking-tight text-white;
+      }
+      .card-surface {
+        @apply bg-[#111111] border border-gray-800/60 rounded-xl p-6 shadow-xl shadow-black/60;
+      }
+      .btn-primary {
+        @apply inline-flex items-center justify-center rounded-lg bg-dx-green text-black font-semibold px-5 py-3 text-sm md:text-base shadow-glow hover:shadow-glow hover:opacity-90 transition;
+      }
+      .btn-outline {
+        @apply inline-flex items-center justify-center rounded-lg border border-dx-green text-dx-green font-semibold px-5 py-3 text-sm md:text-base hover:bg-dx-green hover:text-black transition;
+      }
+
+/* fallback if @apply doesn't parse in CDN mode */
+      .section-container {
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+      @media (min-width: 1024px) {
+        .section-container {
+          padding-top: 6rem;
+          padding-bottom: 6rem;
+        }
+      }
+      .section-eyebrow {
+        color: #2ecc71;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+      }
+      .section-title {
+        color: #fff;
+        font-family: "Poppins", system-ui, sans-serif;
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+      }
+      @media (min-width: 768px) {
+        .section-title {
+          font-size: 2.25rem;
+          line-height: 2.5rem;
+        }
+      }
+      .card-surface {
+        background-color: #111111;
+        border: 1px solid rgba(31, 41, 55, 0.6);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      }
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.5rem;
+        background-color: #2ecc71;
+        color: #000;
+        font-weight: 600;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        box-shadow: 0 0 40px rgba(46, 204, 113, 0.3);
+      }
+      @media (min-width: 768px) {
+        .btn-primary {
+          font-size: 1rem;
+          line-height: 1.5rem;
+        }
+      }
+      .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.5rem;
+        border: 1px solid #2ecc71;
+        color: #2ecc71;
+        font-weight: 600;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+      .btn-outline:hover {
+        background-color: #2ecc71;
+        color: #000;
+        transition: all 0.2s;
+      }
+
+.border-grid {
+        border: 1px solid rgba(192, 192, 192, 0.15);
+        background: radial-gradient(
+            circle at 0% 0%,
+            rgba(46, 204, 113, 0.25) 0%,
+            rgba(0, 0, 0, 0) 60%
+          ),
+          #111111;
+      }
+
+.nav-link {
+        color: rgb(209 213 219);
+        font-size: 0.875rem;
+      }
+      .nav-link:hover {
+        color: #2ecc71;
+      }
+    </style>
+  </head>
+
+<body class="bg-dx-black text-white selection:bg-dx-green selection:text-black">
+    <!-- NAVBAR -->
+    <header
+    class="border-b border-gray-800/60 bg-[#0a0a0a]/80 backdrop-blur supports-[backdrop-filter]:bg-[#0a0a0a]/60 sticky top-0 z-50"
+    >
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <!-- LOGO -->
+        <a href="#hero" class="flex items-center gap-2">
+        <div
+            class="h-9 w-9 rounded-lg bg-dx-green text-black font-heading font-bold flex items-center justify-center text-xs shadow-glow"
+        >
+            DX
+        </div>
+        <div class="leading-tight">
+            <div class="text-white font-heading font-semibold text-sm tracking-tight">
+            DirhamX
+            </div>
+            <div
+            class="text-[10px] text-dx-green uppercase tracking-wider font-medium"
+            >
+            Digital Trust
+            </div>
+        </div>
+        </a>
+
+        <!-- HAMBURGER (Mobile only) -->
+        <button
+        id="menu-toggle"
+        class="md:hidden flex flex-col justify-center items-center w-9 h-9 border border-gray-700 rounded-lg hover:border-dx-green transition"
+        >
+        <span class="w-4 h-0.5 bg-gray-300 mb-1 transition-all"></span>
+        <span class="w-4 h-0.5 bg-gray-300 mb-1 transition-all"></span>
+        <span class="w-4 h-0.5 bg-gray-300 transition-all"></span>
+        </button>
+
+        <!-- NAV MENU -->
+        <nav
+        id="mobile-menu"
+        class="hidden md:flex items-center gap-6 md:static absolute top-full left-0 w-full md:w-auto bg-[#0a0a0a] md:bg-transparent border-t border-gray-800/60 md:border-none flex-col md:flex-row text-center md:text-left"
+        >
+        <a href="index.html" class="nav-link py-3 md:py-0 block">About</a>
+        <a href="ecosystem.html" class="nav-link py-3 md:py-0 block">Ecosystem</a>
+        <a href="work.html" class="nav-link py-3 md:py-0 block">Work With Us</a>
+        <a href="roadmap.html" class="nav-link py-3 md:py-0 block">Roadmap</a>
+        <a href="contact.html" class="nav-link py-3 md:py-0 block">Contact</a>
+
+        <a
+            href="access.html"
+            class="btn-primary text-xs md:text-sm my-4 md:my-0"
+        >
+            Early Access
+        </a>
+        </nav>
+    </div>
+    </header>
+
+<!-- HERO -->
+    <section
+      id="hero"
+      class="relative overflow-hidden bg-dx-radial border-b border-gray-800/60"
+    >
+      <div
+        class="section-container relative z-10 grid lg:grid-cols-2 gap-12 items-center"
+      >
+        <div>
+          <div
+            class="text-dx-green text-sm font-medium uppercase tracking-wider mb-4"
+          >
+            DirhamX — Digital Trust You Can Hold
+          </div>
+
+<h1
+            class="text-4xl md:text-5xl font-heading font-semibold text-white leading-tight tracking-tight"
+          >
+            Digital Trust You Can Hold
+          </h1>
+
+<p class="mt-6 text-gray-300 text-lg leading-relaxed max-w-xl">
+            We connect real-world assets like Silver, Land, and Commodities to
+            secure digital ecosystems — built on transparency, traceability,
+            and trust.
+          </p>
+
+<div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <a href="access.html" class="btn-primary"
+              >Be the First to Access DirhamX</a
+            >
+            <a href="#ecosystem" class="btn-outline"
+              >Explore the Ecosystem</a
+            >
+          </div>
+
+<div
+            class="mt-8 text-[11px] tracking-wider text-gray-500 uppercase"
+          >
+            Real Assets • Real Transparency • Real Participation
+          </div>
+        </div>
+
+<div class="relative">
+          <div
+            class="relative rounded-2xl border-grid p-4 shadow-glow shadow-dx-green/20"
+          >
+            <img
+              src="https://via.placeholder.com/600x400?text=DXS+Silver+Custody"
+              alt="Digital assets backed by real-world value"
+              class="rounded-xl object-cover w-full h-auto border border-gray-800/60"
+            />
+            <div
+              class="absolute bottom-4 left-4 bg-black/70 backdrop-blur rounded-lg border border-gray-700/60 p-4 text-xs text-gray-300 max-w-[80%]"
+            >
+              <div
+                class="text-dx-green font-semibold uppercase tracking-wider text-[10px]"
+              >
+                Traceable • Auditable • Real
+              </div>
+              <div class="mt-1 font-medium text-white">
+                Each DXS Silver token represents verified silver in secure
+                custody.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- WHY WE EXIST -->
+    <section id="about" class="section-container">
+      <div class="max-w-3xl">
+        <div class="section-eyebrow">Why We Exist</div>
+        <h2 class="section-title">
+          Real assets. Real technology. Real inclusion.
+        </h2>
+        <p class="mt-4 text-gray-400 text-base leading-relaxed">
+          Traditional finance is complex and exclusive. Digital finance became
+          speculative and disconnected from reality. DirhamX builds the middle
+          path — asset-backed transparency for everyone.
+        </p>
+      </div>
+
+<div
+        class="mt-8 text-gray-300 max-w-3xl text-base leading-relaxed space-y-4"
+      >
+        <p>
+          DirhamX exists to build a middle path — where
+          <span class="text-white font-medium"
+            >real assets meet real technology</span
+          >. We create digital ecosystems backed by tangible value, empowering
+          people, partners, and communities with transparent participation.
+        </p>
+        <div
+          class="p-4 border border-gray-800/60 rounded-lg bg-[#111]/60 text-sm leading-relaxed"
+        >
+          <div
+            class="text-dx-green font-semibold uppercase text-[10px] tracking-wider mb-2"
+          >
+            Our Purpose
+          </div>
+          <div class="text-white font-medium text-base">
+            To lead in the never-ending pursuit of digital trust.
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+<!-- WHY CHOOSE DIRHAMX -->
+    <section
+      class="section-container"
+    >
+      <div class="max-w-3xl">
+        <div class="section-eyebrow">Why Choose DirhamX</div>
+        <h2 class="section-title">Digital Trust, Backed by Fiscal Trust.</h2>
+      </div>
+
+<div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div class="card-surface">
+          <div
+            class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+          >
+            Easy to Join
+          </div>
+          <div
+            class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+          >
+            Easy to Join
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mt-3">
+            Designed for everyone. Access the ecosystem through verified digital
+            wallets and user-friendly onboarding.
+          </p>
+        </div>
+
+<div class="card-surface">
+          <div
+            class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+          >
+            Safe & Secure
+          </div>
+          <div
+            class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+          >
+            Safe & Secure
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mt-3">
+            Every asset is traceable, documented, and validated through TruID.
+            We prioritize security and authenticity.
+          </p>
+        </div>
+
+<div class="card-surface">
+          <div
+            class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+          >
+            Affordable Plan
+          </div>
+          <div
+            class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+          >
+            Affordable Plan
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mt-3">
+            Participation is designed to be inclusive — enabling small entries
+            and community-based growth.
+          </p>
+        </div>
+
+<div class="card-surface">
+          <div
+            class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+          >
+            RWA-Backed
+          </div>
+          <div
+            class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+          >
+            RWA-Backed
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mt-3">
+            Each token and project is supported by tangible, real-world assets
+            like silver, land, and food systems.
+          </p>
+        </div>
+      </div>
+    </section>
+
+<!-- POWERED BY DX DIGITAL -->
+    <section class="section-container">
+      <div class="max-w-3xl">
+        <div class="section-eyebrow">Powered by DX DIGITAL</div>
+        <h2 class="section-title">
+          Built by DX DIGITAL — Global Innovators in RWA Tokenization
+        </h2>
+        <p class="mt-4 text-gray-400 text-base leading-relaxed">
+          DX DIGITAL is the technology and governance backbone of DirhamX. We
+          integrate blockchain, traceability, and ethical finance to create a
+          new generation of real-asset ecosystems.
+        </p>
+      </div>
+
+<div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="card-surface">
+          <p class="text-white text-sm font-medium leading-relaxed">
+            DX Bullion — Precious metal custody & digitization
+          </p>
+        </div>
+        <div class="card-surface">
+          <p class="text-white text-sm font-medium leading-relaxed">
+            DX Land — Agricultural and land-based tokenization
+          </p>
+        </div>
+        <div class="card-surface">
+          <p class="text-white text-sm font-medium leading-relaxed">
+            DX Capital — Venture & capital structuring
+          </p>
+        </div>
+        <div class="card-surface">
+          <p class="text-white text-sm font-medium leading-relaxed">
+            TruID — Traceability & verification technology
+          </p>
+        </div>
+        <div class="card-surface">
+          <p class="text-white text-sm font-medium leading-relaxed">
+            PAZA Labs — Loyalty, rewards, and affiliate infrastructure
+          </p>
+        </div>
+      </div>
+
+<div class="mt-8 text-gray-300 text-base leading-relaxed max-w-3xl">
+        Together, we’re shaping the future of ethical digital finance — one
+        verified asset at a time.
+      </div>
+    </section>
+
+<!-- RESOURCES -->
+    <section id="resources" class="section-container">
+      <div class="max-w-3xl">
+        <div class="section-eyebrow">Resources</div>
+        <h2 class="section-title">Clarity, Transparency, Proof.</h2>
+        <p class="mt-4 text-gray-400 text-base leading-relaxed">
+          Research, reporting, and public-facing disclosures that build trust.
+        </p>
+      </div>
+
+<div class="mt-10 grid gap-6 lg:grid-cols-2">
+        <div class="card-surface">
+          <div
+            class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+          >
+            Insights
+          </div>
+          <div
+            class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+          >
+            RWA, DeFi, and tokenization thought leadership
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mt-3">
+            How real-world assets change digital finance, responsibly.
+          </p>
+        </div>
+
+<div class="card-surface">
+          <div
+            class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+          >
+            Case Studies
+          </div>
+          <div
+            class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+          >
+            Silver, land, and agriculture success stories
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mt-3">
+            From freshwater aquaculture to bullion custody.
+          </p>
+        </div>
+
+<div class="card-surface">
+          <div
+            class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+          >
+            ESG Reports
+          </div>
+          <div
+            class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+          >
+            Transparency, Shariah alignment, and impact
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mt-3">
+            Proof that doing good and doing well can align.
+          </p>
+        </div>
+
+<div class="card-surface">
+          <div
+            class="text-dx-green text-[11px] font-semibold uppercase tracking-wider"
+          >
+            Downloads
+          </div>
+          <div
+            class="text-white font-heading font-semibold text-lg leading-snug mt-1"
+          >
+            Brochures, whitepapers, and pitch decks
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mt-3">
+            Public-facing, regulator-safe documents.
+          </p>
+        </div>
+      </div>
+    </section>
+
+<!-- FOOTER -->
+    <footer
+      class="border-t border-gray-800/60 bg-[#0f0f0f] pt-16 pb-12 text-sm"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10 text-gray-300"
+      >
+        <div>
+          <div
+            class="text-white font-heading font-semibold text-lg tracking-tight"
+          >
+            DirhamX
+          </div>
+          <p class="text-gray-400 text-sm mt-3 leading-relaxed">
+            DirhamX develops real-world-asset (RWA) ecosystems that connect
+            physical commodities, land, and production to transparent digital
+            participation.
+          </p>
+        </div>
+
+<div>
+          <div
+            class="text-dx-green font-semibold uppercase text-xs tracking-wider mb-3"
+          >
+            Quick Links
+          </div>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="#about" class="hover:text-dx-green">About</a></li>
+            <li>
+              <a href="#ecosystem" class="hover:text-dx-green">Ecosystem</a>
+            </li>
+            <li>
+              <a href="#work" class="hover:text-dx-green">Work With Us</a>
+            </li>
+            <li>
+              <a href="#services" class="hover:text-dx-green">Services</a>
+            </li>
+            <li>
+              <a href="contact.html" class="hover:text-dx-green">Contact</a>
+            </li>
+          </ul>
+        </div>
+
+<div>
+          <div
+            class="text-dx-green font-semibold uppercase text-xs tracking-wider mb-3"
+          >
+            Contact
+          </div>
+          <p class="text-gray-300 leading-relaxed">
+            Email:
+            <span class="text-white font-medium"
+              >contact@dirhamx.digital</span
+            ><br />
+            HQ (placeholder): DX DIGITAL Ventures,<br />
+            Kuala Lumpur, Malaysia
+          </p>
+        </div>
+
+<div>
+          <div
+            class="text-dx-green font-semibold uppercase text-xs tracking-wider mb-3"
+          >
+            Legal
+          </div>
+          <p class="text-gray-400 text-xs leading-relaxed">
+            DirhamX and its affiliates operate within an ethical, utility-based
+            framework focused on real-world asset traceability. DirhamX does
+            not guarantee profits or offer financial returns. Participation is
+            subject to local regulations and jurisdictional eligibility.
+          </p>
+        </div>
+      </div>
+
+<div
+        class="max-w-7xl mx-auto px-6 mt-12 text-[11px] text-gray-600 border-t border-gray-800/60 pt-6"
+      >
+        © <span id="year"></span> DirhamX. All rights reserved.
+      </div>
+    </footer>
+
+<script>
+      // set current year in footer
+      document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+        const menuToggle = document.getElementById("menu-toggle");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const bars = menuToggle.querySelectorAll("span");
+
+        // fungsi untuk toggle menu
+        function toggleMenu() {
+          mobileMenu.classList.toggle("hidden");
+
+          // animasi garis hamburger jadi X
+          bars[0].classList.toggle("rotate-45");
+          bars[0].classList.toggle("translate-y-1.5");
+          bars[1].classList.toggle("opacity-0");
+          bars[2].classList.toggle("-rotate-45");
+          bars[2].classList.toggle("-translate-y-1.5");
+        }
+
+        // buka/tutup menu saat tombol diklik
+        menuToggle.addEventListener("click", (e) => {
+          e.stopPropagation(); // cegah event bubbling
+          toggleMenu();
+        });
+
+        // tutup menu jika klik di luar area menu dan tombol
+        document.addEventListener("click", (e) => {
+          const isClickInsideMenu =
+            mobileMenu.contains(e.target) || menuToggle.contains(e.target);
+
+          // hanya jalankan kalau menu sedang terbuka dan klik di luar
+          if (!isClickInsideMenu && !mobileMenu.classList.contains("hidden")) {
+            toggleMenu();
+          }
+        });
+
+        // Efek opacity menu mobile saat scroll
+        window.addEventListener("scroll", () => {
+          const mobileMenu = document.getElementById("mobile-menu");
+
+          // hanya jalan di mobile dan saat menu terbuka
+          if (window.innerWidth <= 768 && !mobileMenu.classList.contains("hidden")) {
+            if (window.scrollY > 15) {
+              // kurangi opacity saat scroll ke bawah
+              mobileMenu.style.backgroundColor = "rgba(10, 10, 10, 0.7)";
+              mobileMenu.style.transition = "background-color 0.3s ease";
+            } else {
+              // kembalikan opacity saat di atas
+              mobileMenu.style.backgroundColor = "rgba(10, 10, 10, 1)";
+            }
+          }
+        });
+
+    </script>
+  </body>
+</html>
